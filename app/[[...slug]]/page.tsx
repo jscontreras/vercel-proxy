@@ -1,39 +1,13 @@
 import { cookies } from 'next/headers'
 import { redirect } from 'next/navigation'
-import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
+import { CookieManager } from '@/components/cookie-manager'
 
 interface PageProps {
   params: Promise<{
     slug?: string[]
   }>
-}
-
-async function setCookie(formData: FormData) {
-  'use server'
-
-  const value = formData.get('gb_choice') as string
-  const cookieStore = await cookies()
-
-  cookieStore.set('gb_choice', value, {
-    httpOnly: false,
-    secure: process.env.NODE_ENV === 'production',
-    sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 30 // 30 days
-  })
-
-  redirect(formData.get('currentPath') as string)
-}
-
-async function clearCookie(formData: FormData) {
-  'use server'
-
-  const cookieStore = await cookies()
-  cookieStore.delete('gb_choice')
-
-  redirect(formData.get('currentPath') as string)
 }
 
 export default async function SlugPage({ params }: PageProps) {
@@ -78,39 +52,7 @@ export default async function SlugPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
-        <Card>
-          <CardHeader>
-            <CardTitle>Cookie Management</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-6">
-            <form action={setCookie} className="space-y-4">
-              <input type="hidden" name="currentPath" value={currentPath} />
-              <div>
-                <Label className="text-sm font-medium mb-3 block">Set gb_choice Cookie:</Label>
-                <RadioGroup name="gb_choice" defaultValue={gbChoice?.value || 'true'}>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="true" id="true" />
-                    <Label htmlFor="true">True</Label>
-                  </div>
-                  <div className="flex items-center space-x-2">
-                    <RadioGroupItem value="false" id="false" />
-                    <Label htmlFor="false">False</Label>
-                  </div>
-                </RadioGroup>
-              </div>
-              <Button type="submit" className="w-full">
-                Set Cookie
-              </Button>
-            </form>
-
-            <form action={clearCookie}>
-              <input type="hidden" name="currentPath" value={currentPath} />
-              <Button type="submit" variant="destructive" className="w-full">
-                Clear Cookie
-              </Button>
-            </form>
-          </CardContent>
-        </Card>
+        <CookieManager />
 
         <Card>
           <CardHeader>
