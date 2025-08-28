@@ -1,0 +1,7 @@
+{
+  "cross-platform-config": {
+    "legacyPhpDomain": "your-site.godaddy.com",
+    "vercelDomain": "your-new-site.vercel.app",
+    "trafficVercelPercent": 10
+  }
+}
