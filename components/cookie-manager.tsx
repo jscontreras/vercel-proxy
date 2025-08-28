@@ -1,21 +1,21 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 
-interface CookieManagerProps {
-  initialValue?: string
-  currentPath: string
-}
+export function CookieManager() {
+  let initialValue = 'false'
+  if (typeof document !== 'undefined') {
+    const cookies = document.cookie.split(';')
+    const gbChoiceCookie = cookies.find(cookie => cookie.trim().startsWith('gb_choice='))
+    initialValue = gbChoiceCookie ? gbChoiceCookie.split('=')[1].trim() : 'false'
+  }
 
-export function CookieManager({ initialValue, currentPath }: CookieManagerProps) {
   const [cookieValue, setCookieValue] = useState(initialValue || 'true')
   const [displayValue, setDisplayValue] = useState(initialValue || 'Not set')
-  const router = useRouter()
 
   const setCookie = (value: string) => {
     // Set cookie with 30 days expiration
