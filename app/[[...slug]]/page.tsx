@@ -47,11 +47,7 @@ export default async function SlugPage({ params }: PageProps) {
 
   const getBannerClasses = () => {
     let bannerClasses = 'w-full text-center py-4 text-4xl font-bold rounded-lg mb-8'
-    if (gbChoice?.value === 'true') {
-      bannerClasses += ' bg-yellow-400 text-black'
-    } else {
-      bannerClasses += ' bg-red-600 text-white'
-    }
+    bannerClasses += ' bg-blue-400 text-black'
     return bannerClasses
   }
 
