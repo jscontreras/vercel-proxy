@@ -52,6 +52,20 @@ export default async function SlugPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
+        <Card>
+          <CardHeader>
+            <CardTitle>Variant Source</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <Label className="text-sm font-medium">Proxied Site URL:</Label>
+              <p className="text-lg font-mono bg-muted p-2 rounded mt-1">
+                {process.env.PROXIED_SITE_URL || 'Not configured'}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+
         <CookieManager />
 
         <Card>
