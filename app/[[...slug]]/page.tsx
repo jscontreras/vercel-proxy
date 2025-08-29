@@ -85,6 +85,22 @@ export default async function SlugPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </div>
+
+      <footer className="mt-12 pt-8 border-t border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm text-muted-foreground">
+            View the source code on{' '}
+            <a
+              href="https://github.com/jscontreras/vercel-proxy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline font-medium"
+            >
+              GitHub
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }
