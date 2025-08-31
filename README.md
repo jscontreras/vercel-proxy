@@ -11,10 +11,16 @@ The `middleware.ts` file contains the logic for the A/B test. Here's a breakdown
     {
       "abReleases": {
         "threshold": 0.2,
+        "overrideDelay": 300,
         "active": true
       }
     }
     ```
+    - `threshold`: The probability (0-1) for assigning users to the test variant
+    - `overrideDelay`: Time in seconds to wait before overriding existing cookies when the threshold changes
+    - `active`: Whether the A/B test is currently running
+
+    > **Note**: The `gb_choice` cookie in this implementation is editable from the client side for educational and testing purposes only. In production environments, it is highly recommended to set the cookie with the `HttpOnly` flag in the `middleware.tsx` to ensure it can only be modified server-side, preventing client-side tampering and maintaining the integrity of your A/B test results.
 
 2.  **Check for Active Test**: It checks if the `active` property in the configuration is `true`. If it's `false`, the middleware does nothing and the user proceeds to the default version of the site.
 

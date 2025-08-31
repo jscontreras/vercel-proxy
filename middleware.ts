@@ -37,7 +37,10 @@ export async function middleware(req: NextRequest) {
   if (isOverridden) {
     const randomNumber = Math.random();
     gbChoice = randomNumber < abReleases.threshold ? "true" : "false";
-    response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`);
+    response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`, {
+      httpOnly: true,
+      secure: true,
+    });
   }
 
   // If the cookie value is true, then rewrite to the proxied site
