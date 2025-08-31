@@ -1,4 +1,3 @@
-import { cookies } from 'next/headers'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { CookieManager } from '@/components/cookie-manager'
