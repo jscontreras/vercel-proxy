@@ -8,18 +8,21 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group'
 import { getABReleases } from '@/app/[[...slug]]/actions'
 
 export function CookieManager() {
-  let initialValue = ''
+  let initialValue = '', initialFullValue = ''
   const [cookieValue, setCookieValue] = useState(initialValue)
+  const [fullCookieValue, setFullCookieValue] = useState(initialValue)
 
   if (typeof document !== 'undefined') {
     const cookies = document.cookie.split(';')
     const gbChoiceCookie = cookies.find(cookie => cookie.trim().startsWith('gb_choice='))
+    initialFullValue = gbChoiceCookie ? gbChoiceCookie.split('=')[1].trim() : ''
     initialValue = gbChoiceCookie ? gbChoiceCookie.split('=')[1].trim().startsWith('true') ? 'true' : 'false' : 'false'
   }
 
   // As the cookie value is set on the server, we need to set the initial value on the client
   useEffect(() => {
     setCookieValue(initialValue)
+    setFullCookieValue(initialFullValue)
   }, [])
 
   const setCookie = (value: string) => {
@@ -49,6 +52,7 @@ export function CookieManager() {
       console.error('Failed to fetch ABReleases')
       return
     }
+    // This is setting the cookie client side. In production, we would set the cookie server side (see readme).
     setCookie(`${cookieValue}::${abReleases.threshold}::${Date.now()}`)
   }
 
@@ -56,9 +60,15 @@ export function CookieManager() {
     <div className="space-y-6">
       <Card>
         <CardHeader>
-          <CardTitle>Cookie Management</CardTitle>
+          <CardTitle>Cookie Management (client side)</CardTitle>
         </CardHeader>
         <CardContent className="space-y-6">
+          <div>
+            <Label className="text-sm font-medium">gb_choice Cookie Value:</Label>
+            <p className="text-lg font-mono bg-muted p-2 rounded mt-1">
+              {decodeURIComponent(fullCookieValue) || 'Not set'}
+            </p>
+          </div>
           <form onSubmit={handleSetCookie} className="space-y-4">
             <div>
               <Label className="text-sm font-medium mb-3 block">Set gb_choice Cookie:</Label>

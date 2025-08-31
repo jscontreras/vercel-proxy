@@ -26,7 +26,7 @@ export async function middleware(req: NextRequest) {
     gbChoice = randomNumber < abReleases.threshold ? "true" : "false";
     // gb_choice::threshold::timestamp
     response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`, {
-      httpOnly: true,
+      // httpOnly: true, // In production, we would set this to true as the cookie can only be set server side (see readme).
       secure: true,
     });
   }
@@ -41,7 +41,7 @@ export async function middleware(req: NextRequest) {
     const randomNumber = Math.random();
     gbChoice = randomNumber < abReleases.threshold ? "true" : "false";
     response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`, {
-      httpOnly: true,
+      // httpOnly: true, // In production, we would set this to true as the cookie can only be set server side (see readme).
       secure: true,
     });
   }

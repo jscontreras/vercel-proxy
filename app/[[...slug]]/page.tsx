@@ -11,11 +11,7 @@ interface PageProps {
 
 export default async function SlugPage({ params }: PageProps) {
   const { slug } = await params
-  const cookieStore = await cookies()
-  const gbChoice = cookieStore.get('gb_choice')
-
   const slugPath = slug ? slug.join('/') : 'root'
-  const currentPath = slug ? `/${slug.join('/')}` : '/'
   const variantLabel = process.env.VARIANT_LABEL || 'Variant A'
 
   const getBannerClasses = () => {
@@ -39,13 +35,6 @@ export default async function SlugPage({ params }: PageProps) {
               <Label className="text-sm font-medium">Current Slug:</Label>
               <p className="text-lg font-mono bg-muted p-2 rounded mt-1">
                 {slugPath}
-              </p>
-            </div>
-
-            <div>
-              <Label className="text-sm font-medium">gb_choice Cookie Value:</Label>
-              <p className="text-lg font-mono bg-muted p-2 rounded mt-1">
-                {gbChoice?.value || 'Not set'}
               </p>
             </div>
           </CardContent>
