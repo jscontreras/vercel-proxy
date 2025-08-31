@@ -2,6 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { CookieManager } from '@/components/cookie-manager'
 
+export const dynamic = 'force-static'
+
 interface PageProps {
   params: Promise<{
     slug?: string[]
