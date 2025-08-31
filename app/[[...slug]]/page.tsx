@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { CookieManager } from '@/components/cookie-manager'
@@ -65,9 +64,7 @@ export default async function SlugPage({ params }: PageProps) {
             </div>
           </CardContent>
         </Card>
-
         <CookieManager />
-
         <Card>
           <CardHeader>
             <CardTitle>Navigation Examples</CardTitle>
