@@ -25,7 +25,10 @@ export async function middleware(req: NextRequest) {
     const randomNumber = Math.random();
     gbChoice = randomNumber < abReleases.threshold ? "true" : "false";
     // gb_choice::threshold::timestamp
-    response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`);
+    response.cookies.set("gb_choice", `${gbChoice}::${abReleases.threshold}::${Date.now()}`, {
+      httpOnly: true,
+      secure: true,
+    });
   }
 
   // Extract the values from the already set cookie
