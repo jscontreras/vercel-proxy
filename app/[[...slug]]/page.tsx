@@ -1,5 +1,4 @@
 import { cookies } from 'next/headers'
-import { redirect } from 'next/navigation'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Label } from '@/components/ui/label'
 import { CookieManager } from '@/components/cookie-manager'
@@ -52,8 +51,20 @@ export default async function SlugPage({ params }: PageProps) {
           </CardContent>
         </Card>
 
+        <Card>
+          <CardHeader>
+            <CardTitle>Variant Source</CardTitle>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <div>
+              <Label className="text-sm font-medium">Proxied Site URL:</Label>
+              <p className="text-lg font-mono bg-muted p-2 rounded mt-1">
+                {process.env.PROXIED_SITE_URL || 'Not configured'}
+              </p>
+            </div>
+          </CardContent>
+        </Card>
         <CookieManager />
-
         <Card>
           <CardHeader>
             <CardTitle>Navigation Examples</CardTitle>
@@ -71,6 +82,22 @@ export default async function SlugPage({ params }: PageProps) {
           </CardContent>
         </Card>
       </div>
+
+      <footer className="mt-12 pt-8 border-t border-border">
+        <div className="max-w-4xl mx-auto text-center">
+          <p className="text-sm text-muted-foreground">
+            View the source code on{' '}
+            <a
+              href="https://github.com/jscontreras/vercel-proxy"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-primary hover:underline font-medium"
+            >
+              GitHub
+            </a>
+          </p>
+        </div>
+      </footer>
     </div>
   )
 }

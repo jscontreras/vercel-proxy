@@ -11,7 +11,7 @@ The `middleware.ts` file contains the logic for the A/B test. Here's a breakdown
     {
       "abReleases": {
         "threshold": 0.2,
-        "active": false
+        "active": true
       }
     }
     ```
